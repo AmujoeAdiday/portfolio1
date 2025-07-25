@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Data Scientist Portfolio | Building Enterprise AI Solutions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #00d9ff;
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(12, 12, 12, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(12, 12, 12, 0.98);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #00d9ff, #7b68ee);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #00d9ff;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: linear-gradient(45deg, #00d9ff, #7b68ee);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 2;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #00d9ff, #7b68ee, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: textShine 3s ease-in-out infinite;
+        }
+
+        @keyframes textShine {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #00d9ff, #7b68ee);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 217, 255, 0.5);
+        }
+
+        /* Sections */
+        .section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            background: linear-gradient(45deg, #00d9ff, #7b68ee);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Experience Cards */
+        .experience-grid {
+            display: grid;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .experience-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1.5rem;
+            align-items: start;
+        }
+
+        .experience-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .experience-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 217, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .experience-card:hover::before {
+            left: 100%;
+        }
+
+        .experience-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 217, 255, 0.2);
+        }
+
+        .work-showcase-box {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            border: 2px dashed rgba(0, 217, 255, 0.3);
+            transition: all 0.3s ease;
+            height: fit-content;
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .work-showcase-box:hover {
+            border-color: rgba(0, 217, 255, 0.6);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 217, 255, 0.2);
+        }
+
+        .work-image-placeholder {
+            width: 100%;
+            height: 240px;
+            background: rgba(0, 217, 255, 0.05);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px dashed rgba(0, 217, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .work-image-placeholder:hover {
+            background: rgba(0, 217, 255, 0.1);
+            border-color: rgba(0, 217, 255, 0.5);
+        }
+
+        .placeholder-text {
+            color: #00d9ff;
+            font-size: 0.8rem;
+            opacity: 0.6;
+        }
+
+        .work-image {
+            width: 100%;
+            height: 240px;
+            border-radius: 15px;
+            object-fit: cover;
+            border: 2px solid rgba(0, 217, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .work-image:hover {
+            transform: scale(1.05);
+            border-color: rgba(0, 217, 255, 0.6);
+            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3);
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+
+        .experience-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .experience-details {
+            flex: 1;
+        }
+
+        .experience-title {
+            font-size: 1.3rem;
+            color: #00d9ff;
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-company {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .experience-date {
+            color: #7b68ee;
+            font-weight: 500;
+        }
+
+        .impact-section {
+            margin: 1rem 0;
+        }
+
+        .impact-title {
+            color: #ff6b6b;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .impact-list {
+            list-style: none;
+            margin-left: 1rem;
+        }
+
+        .impact-list li {
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+
+        .impact-list li::before {
+            content: '🚀';
+            position: absolute;
+            left: -1.5rem;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 60px rgba(123, 104, 238, 0.3);
+        }
+
+        .project-title {
+            font-size: 1.4rem;
+            color: #7b68ee;
+            margin-bottom: 1rem;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .tech-tag {
+            background: rgba(0, 217, 255, 0.2);
+            color: #00d9ff;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(0, 217, 255, 0.3);
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .skill-category {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .skill-category h3 {
+            color: #ff6b6b;
+            margin-bottom: 1rem;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-item {
+            background: rgba(255, 107, 107, 0.2);
+            color: #ff6b6b;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255, 107, 107, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            transform: scale(1.1);
+            background: rgba(255, 107, 107, 0.3);
+        }
+
+        /* Achievements */
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .achievement-card {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .achievement-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 217, 255, 0.2);
+        }
+
+        .achievement-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #00d9ff;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(12, 12, 12, 0.8);
+            text-align: center;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .contact-links a {
+            color: #00d9ff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-links a:hover {
+            color: #7b68ee;
+            transform: translateY(-2px);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .experience-container {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .experience-card, .project-card {
+                padding: 1.5rem;
+            }
+            
+            .work-showcase-box {
+                padding: 1rem;
+                min-height: 200px;
+            }
+            
+            .work-image-placeholder, .work-image {
+                height: 180px;
+            }
+            
+            .section {
+                padding: 3rem 1rem;
+            }
+            
+            .floating-photo {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .corner-image {
+                width: 80px;
+                height: 80px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .experience-container {
+                grid-template-columns: 1.5fr 1fr;
+                gap: 1rem;
+            }
+            
+            .work-image-placeholder, .work-image {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation" id="bgAnimation"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">AI Portfolio</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#certifications">Certifications</a></li>
+                <li><a href="#leadership">Leadership</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#achievements">Achievements</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="floating-photo">
+            <img src="me.jpg" alt="Profile" class="corner-image">
+        </div>
+        <div class="hero-content">
+            <h1>AI Data Scientist</h1>
+            <p>Building Enterprise AI Solutions That Drive Real Business Impact</p>
+            <p>Transforming complex data into $2M+ savings and breakthrough innovations</p>
+            <a href="#experience" class="cta-button">Explore My Work</a>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section">
+        <h2>Professional Experience</h2>
+        <div class="experience-grid">
+            <div class="experience-container fade-in">
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <div class="experience-details">
+                            <div class="experience-title">AI Data Scientist</div>
+                            <div class="experience-company">Eastland Food Corporation</div>
+                        </div>
+                        <div class="experience-date">Jan 2025 - Present</div>
+                    </div>
+                    <div class="impact-section">
+                        <div class="impact-title">🎯 Business Impact:</div>
+                        <ul class="impact-list">
+                            <li><strong>Saving team to remove manual task in forecasting</strong> through AI-driven forecasting systems for 1,000+ products</li>
+                            <li><strong>30% reduction in excess stock</strong> by targeting high-volume and fast-growth SKUs</li>
+                            <li><strong>Built enterprise AI infrastructure</strong> for supply chain optimization using AWS SageMaker</li>
+                        </ul>
+                    </div>
+                    <div class="impact-section">
+                        <div class="impact-title">⚙️ Technical Implementation:</div>
+                        <ul class="impact-list">
+                            <li>Developed end-to-end forecasting pipelines using Facebook Prophet model, LLM integration, and Streamlit dashboards</li>
+                            <li>Presented strategic roadmap to executive committee, securing alignment on capital efficiency metrics</li>
+                            <li>Architected scalable ML infrastructure on AWS for real-time inventory decision-making</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="work-showcase-box">
+                    <img src="Eastland.jpg" alt="Eastland Forecasting System" class="work-image">
+                </div>
+            </div>
+
+            <div class="experience-container fade-in">
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <div class="experience-details">
+                            <div class="experience-title">Data Scientist, M&A Software</div>
+                            <div class="experience-company">Accu Holdings, LLC</div>
+                        </div>
+                        <div class="experience-date">Nov 2023 - Dec 2024</div>
+                    </div>
+                    <div class="impact-section">
+                        <div class="impact-title">🎯 Business Impact:</div>
+                        <ul class="impact-list">
+                            <li><strong>Secured $40K+ AWS funding</strong> for Generative AI POC using OpenAI and AWS Bedrock</li>
+                            <li><strong>30% improvement in data processing time</strong> through GenAI knowledge base implementation</li>
+                        </ul>
+                    </div>
+                    <div class="impact-section">
+                        <div class="impact-title">⚙️ Technical Implementation:</div>
+                        <ul class="impact-list">
+                            <li>Built production GenAI system using OpenAI, AWS Bedrock (Amazon Titan), and LangChain</li>
+                            <li>Developed serverless AI operations using Amazon Lambda functions</li>
+                            <li>Created scalable knowledge base architecture for M&A due diligence processes</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="work-showcase-box">
+                    <img src="Accu.jpg" alt="GenAI Knowledge Base System" class="work-image">
+                </div>
+            </div>
+
+            <div class="experience-container fade-in">
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <div class="experience-details">
+                            <div class="experience-title">Machine Learning Engineer</div>
+                            <div class="experience-company">Northeastern Illinois University</div>
+                        </div>
+                        <div class="experience-date">Aug 2022 - May 2023</div>
+                    </div>
+                    <div class="impact-section">
+                        <div class="impact-title">🎯 Business Impact:</div>
+                        <ul class="impact-list">
+                            <li><strong>96% accuracy in patient outcome predictions</strong> for healthcare ML models</li>
+                            <li><strong>Solved critical class imbalance</strong> in medical datasets, improving diagnostic reliability</li>
+                        </ul>
+                    </div>
+                    <div class="impact-section">
+                        <div class="impact-title">⚙️ Technical Implementation:</div>
+                        <ul class="impact-list">
+                            <li>Deployed healthcare ML models on AWS EC2 with Flask APIs</li>
+                            <li>Applied SMOTE technique for class imbalance in migraine prediction datasets</li>
+                            <li>Built production-ready healthcare prediction systems using Python</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="work-showcase-box">
+                    <img src="Migraine.jpg" alt="Healthcare ML Migraine Prediction" class="work-image">
+                </div>
+            </div>
+
+            <div class="experience-container fade-in">
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <div class="experience-details">
+                            <div class="experience-title">Data Science Lead Intern, Wellness</div>
+                            <div class="experience-company">FemiSpace</div>
+                        </div>
+                        <div class="experience-date">Aug 2022 - Dec 2022</div>
+                    </div>
+                    <div class="impact-section">
+                        <div class="impact-title">🎯 Business Impact:</div>
+                        <ul class="impact-list">
+                            <li><strong>Orchestrated the development of an AI-driven health recommendation system</strong> incorporating NLP and achieving 92% accuracy in predicting clinically validated outcomes</li>
+                            <li><strong>Employed advanced data modeling techniques</strong> using R, Python, and SQL to transform large datasets into actionable health insights for product development</li>
+                        </ul>
+                    </div>
+                    <div class="impact-section">
+                        <div class="impact-title">⚙️ Technical Implementation:</div>
+                        <ul class="impact-list">
+                            <li>Built AI-driven health recommendation system with NLP integration</li>
+                            <li>Applied advanced statistical modeling and machine learning techniques</li>
+                            <li>Transformed complex healthcare datasets into business intelligence solutions</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="work-showcase-box">
+                    <img src="Femi.jpg" alt="FemiSpace AI Health Recommendation System" class="work-image">
+                </div>
+            </div>
+
+            <div class="experience-container fade-in">
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <div class="experience-details">
+                            <div class="experience-title">Data Analyst, Social Media</div>
+                            <div class="experience-company">Asian Student Achievement</div>
+                        </div>
+                        <div class="experience-date">Sep 2022 - Dec 2022</div>
+                    </div>
+                    <div class="impact-section">
+                        <div class="impact-title">🎯 Business Impact:</div>
+                        <ul class="impact-list">
+                            <li><strong>121% increase in user engagement</strong> using Google Analytics for segmentation and targeted marketing</li>
+                            <li><strong>38% boost in visitor engagement</strong> in six weeks through A/B testing and optimized social media strategies</li>
+                        </ul>
+                    </div>
+                    <div class="impact-section">
+                        <div class="impact-title">⚙️ Technical Implementation:</div>
+                        <ul class="impact-list">
+                            <li>Implemented Google Analytics segmentation for targeted marketing campaigns</li>
+                            <li>Conducted A/B testing for social media optimization</li>
+                            <li>Built engagement tracking and analysis systems</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="work-showcase-box">
+                    <img src="ASA.jpg" alt="Asian Student Achievement Analytics Dashboard" class="work-image">
+                </div>
+            </div>
+
+            <div class="experience-container fade-in">
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <div class="experience-details">
+                            <div class="experience-title">Data Science Intern, Pharmaceutical</div>
+                            <div class="experience-company">AbbVie</div>
+                        </div>
+                        <div class="experience-date">Mar 2022 - Jun 2022</div>
+                    </div>
+                    <div class="impact-section">
+                        <div class="impact-title">🎯 Business Impact:</div>
+                        <ul class="impact-list">
+                            <li><strong>Identified 50-100 hospitalization-causing adverse drug reactions</strong> enhancing patient safety</li>
+                            <li><strong>Influenced strategic product decisions</strong> through ML-driven analysis insights</li>
+                        </ul>
+                    </div>
+                    <div class="impact-section">
+                        <div class="impact-title">⚙️ Technical Implementation:</div>
+                        <ul class="impact-list">
+                            <li>Developed ML/DL models on pharmaceutical datasets for drug safety analysis</li>
+                            <li>Communicated actionable insights to stakeholders for strategic decision-making</li>
+                            <li>Built predictive models for adverse drug reaction identification</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="work-showcase-box">
+                    <img src="AbbVie.jpg" alt="AbbVie Drug Safety Analysis Model" class="work-image">
+                </div>
+            </div>
+
+            <div class="experience-container fade-in">
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <div class="experience-details">
+                            <div class="experience-title">Statistical Consultant</div>
+                            <div class="experience-company">Visiometry</div>
+                        </div>
+                        <div class="experience-date">Jun 2012 - Oct 2017</div>
+                    </div>
+                    <div class="impact-section">
+                        <div class="impact-title">🎯 Business Impact:</div>
+                        <ul class="impact-list">
+                            <li><strong>Provided strategic quantitative analysis and consulting services</strong> to help clients across industries achieve measurable business objectives through evidence-based decision making</li>
+                            <li><strong>Developed and implemented statistical models</strong> for customer segmentation, inventory optimization, and demand forecasting that delivered tangible operational improvements and enhanced profitability</li>
+                        </ul>
+                    </div>
+                    <div class="impact-section">
+                        <div class="impact-title">⚙️ Technical Implementation:</div>
+                        <ul class="impact-list">
+                            <li>Worked with technical and executive teams to translate complex analytical findings into practical business solutions</li>
+                            <li>Created comprehensive reporting dashboards that provided clients with transparent visibility into key performance metrics</li>
+                            <li>Validated statistical outputs and ensured analytical models delivered consistently reliable results in real-world business applications</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="work-showcase-box">
+                    <img src="consulting.jpg" alt="Statistical Consulting Dashboard" class="work-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="section">
+        <h2>Education</h2>
+        <div class="experience-grid">
+            <div class="experience-card fade-in">
+                <div class="experience-header">
+                    <div class="experience-details">
+                        <div class="experience-title">Master's Degree, Computer Science</div>
+                        <div class="experience-company">Northeastern Illinois University</div>
+                    </div>
+                    <div class="experience-date">GPA: 4.0</div>
+                </div>
+                <div class="impact-section">
+                    <div class="impact-title">🎓 Academic Excellence:</div>
+                    <ul class="impact-list">
+                        <li><strong>Perfect 4.0 GPA</strong> in advanced computer science curriculum</li>
+                        <li><strong>Solo Recipient Computer Science's Graduate's Dean Research</strong> - Secured $14,000 grant over two semesters</li>
+                        <li>Specialized in machine learning, artificial intelligence, and data science applications</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="experience-card fade-in">
+                <div class="experience-header">
+                    <div class="experience-details">
+                        <div class="experience-title">Data Analytics Program</div>
+                        <div class="experience-company">University of Illinois Springfield</div>
+                    </div>
+                    <div class="experience-date">GPA: 4.0</div>
+                </div>
+                <div class="impact-section">
+                    <div class="impact-title">🎓 Academic Excellence:</div>
+                    <ul class="impact-list">
+                        <li><strong>Perfect 4.0 GPA</strong> as Guest Student</li>
+                        <li>Advanced data analytics and statistical modeling coursework</li>
+                        <li>Focus on business intelligence and predictive analytics</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="experience-card fade-in">
+                <div class="experience-header">
+                    <div class="experience-details">
+                        <div class="experience-title">Bachelor's Degree, Mathematics</div>
+                        <div class="experience-company">Khon Kaen University</div>
+                    </div>
+                    <div class="experience-date">Thailand</div>
+                </div>
+                <div class="impact-section">
+                    <div class="impact-title">🎓 Mathematical Foundation:</div>
+                    <ul class="impact-list">
+                        <li><strong>Medalist - Thailand Physics and Math Olympics</strong></li>
+                        <li>Strong foundation in mathematical modeling and statistical analysis</li>
+                        <li>Advanced coursework in applied mathematics and computational methods</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications" class="section">
+        <h2>Certifications & Awards</h2>
+        <div class="experience-grid">
+            <div class="experience-card fade-in">
+                <div class="experience-header">
+                    <div>
+                        <div class="experience-title">Trae AI IDE: Zero Limits Hackathon</div>
+                        <div class="experience-company">lablab.ai</div>
+                    </div>
+                    <div class="experience-date">Jul 2025</div>
+                </div>
+                <div class="impact-section">
+                    <div class="impact-title">🏆 Innovation Recognition:</div>
+                    <ul class="impact-list">
+                        <li>Participated in cutting-edge AI development competition</li>
+                        <li>Demonstrated expertise in AI IDE tools and rapid prototyping</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="experience-card fade-in">
+                <div class="experience-header">
+                    <div>
+                        <div class="experience-title">AWS Certified Machine Learning - Specialty</div>
+                        <div class="experience-company">Amazon Web Services (AWS)</div>
+                    </div>
+                    <div class="experience-date">Aug 2022</div>
+                </div>
+                <div class="impact-section">
+                    <div class="impact-title">☁️ Cloud AI Expertise:</div>
+                    <ul class="impact-list">
+                        <li>Certified in AWS machine learning services and best practices</li>
+                        <li>Expertise in SageMaker, Bedrock, and cloud-native AI solutions</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="experience-card fade-in">
+                <div class="experience-header">
+                    <div>
+                        <div class="experience-title">Machine Learning Deep Learning Model Deployment</div>
+                        <div class="experience-company">Udemy</div>
+                    </div>
+                    <div class="experience-date">Jan 2023</div>
+                </div>
+                <div class="impact-section">
+                    <div class="impact-title">🚀 Production ML Skills:</div>
+                    <ul class="impact-list">
+                        <li>Advanced model deployment and MLOps practices</li>
+                        <li>Production-ready machine learning system development</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Volunteering & Leadership Section -->
+    <section id="leadership" class="section">
+        <h2>Leadership & Volunteering</h2>
+        <div class="experience-grid">
+            <div class="experience-card fade-in">
+                <div class="experience-header">
+                    <div>
+                        <div class="experience-title">Data Scientist</div>
+                        <div class="experience-company">Data Science & Machine Learning Research Group</div>
+                    </div>
+                    <div class="experience-date">Volunteer</div>
+                </div>
+                <div class="impact-section">
+                    <div class="impact-title">🎯 Research Impact:</div>
+                    <ul class="impact-list">
+                        <li><strong>Harness machine learning and large language models</strong> to analyze and predict crime patterns in Chicago</li>
+                        <li><strong>Leveraging demographic insights</strong> to foster innovative solutions for public safety</li>
+                        <li>Applied advanced ML techniques for social good and community impact</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="experience-card fade-in">
+                <div class="experience-header">
+                    <div>
+                        <div class="experience-title">Contest Planning Committee Member</div>
+                        <div class="experience-company">Toastmasters International</div>
+                    </div>
+                    <div class="experience-date">Leadership</div>
+                </div>
+                <div class="impact-section">
+                    <div class="impact-title">🎤 Leadership Excellence:</div>
+                    <ul class="impact-list">
+                        <li>Organized and managed competitive speaking events</li>
+                        <li>Developed project management and team coordination skills</li>
+                        <li>Enhanced communication and public speaking abilities</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="experience-card fade-in">
+                <div class="experience-header">
+                    <div>
+                        <div class="experience-title">Data Science Team's Best Performer</div>
+                        <div class="experience-company">FemiSpace</div>
+                    </div>
+                    <div class="experience-date">Award</div>
+                </div>
+                <div class="impact-section">
+                    <div class="impact-title">🏆 Excellence Recognition:</div>
+                    <ul class="impact-list">
+                        <li><strong>Top performer</strong> among data science team members</li>
+                        <li>Recognized for exceptional technical skills and project delivery</li>
+                        <li>92% accuracy achievement in AI health recommendation system</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <h2>AI Innovation Projects</h2>
+        <div class="projects-grid">
+            <div class="experience-container fade-in">
+                <div class="project-card">
+                    <h3 class="project-title">🤖 RAG vs LLM Intelligence Demo</h3>
+                    <p><strong>Advanced Enterprise AI Comparison System</strong></p>
+                    
+                    <p><strong>🏆 Business Problem Solved:</strong><br>
+                    Demonstrated why enterprises need RAG over generic LLMs, showing dramatic difference between generic AI and context-aware responses.</p>
+                    
+                    <div class="tech-stack">
+                        <span class="tech-tag">DPR</span>
+                        <span class="tech-tag">FAISS</span>
+                        <span class="tech-tag">GPT-2</span>
+                        <span class="tech-tag">t-SNE</span>
+                        <span class="tech-tag">Streamlit</span>
+                    </div>
+                    
+                    <p><strong>📊 Key Results:</strong></p>
+                    <ul class="impact-list">
+                        <li><strong>3D embedding visualization</strong> showing semantic similarity in action</li>
+                        <li><strong>Side-by-side comparison</strong> proving context transforms generic AI into company-specific intelligence</li>
+                        <li><strong>Real company policy integration</strong> demonstrating production RAG architecture</li>
+                    </ul>
+                    
+                    <p><strong>💡 Example Impact:</strong><br>
+                    <em>Question: "What should I do if my mobile phone is lost?"</em><br>
+                    ❌ Generic LLM: "Contact your carrier, change passwords..."<br>
+                    ✅ RAG System: "Immediately report to IT department per company policy."</p>
+                </div>
+                <div class="work-showcase-box">
+                    <img src="RAG.jpg" alt="RAG vs LLM Intelligence Demo" class="work-image">
+                </div>
+            </div>
+
+            <div class="experience-container fade-in">
+                <div class="project-card">
+                    <h3 class="project-title">🎯 CrewAI Product Intelligence System</h3>
+                    <p><strong>Multi-Agent AI Team for Business Intelligence</strong></p>
+                    
+                    <p><strong>🏆 Business Problem Solved:</strong><br>
+                    Replaced weeks of manual product analysis with minutes of AI-powered insights using 4 specialized AI agents working together like a real business team.</p>
+                    
+                    <div class="tech-stack">
+                        <span class="tech-tag">CrewAI</span>
+                        <span class="tech-tag">Multi-Agent</span>
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Analytics</span>
+                        <span class="tech-tag">Business Intelligence</span>
+                    </div>
+                    
+                    <p><strong>🤖 AI Agent Architecture:</strong></p>
+                    <ul class="impact-list">
+                        <li><strong>🔍 Seasonality Analyst</strong> - Spots seasonal trends automatically</li>
+                        <li><strong>📈 Trend Detective</strong> - Identifies growth/decline patterns</li>
+                        <li><strong>🎯 Strategy Expert</strong> - Classifies products strategically</li>
+                        <li><strong>💼 Chief Analyst</strong> - Orchestrates team and creates action plans</li>
+                    </ul>
+                    
+                    <p><strong>📊 Quantified Results:</strong></p>
+                    <ul class="impact-list">
+                        <li><strong>89% growth potential identification</strong> for rising star products</li>
+                        <li><strong>3-minute analysis</strong> replacing weeks of manual work</li>
+                        <li><strong>Executive-ready recommendations</strong> with specific action steps</li>
+                    </ul>
+                </div>
+                <div class="work-showcase-box">
+                    <img src="llm.jpg" alt="CrewAI Product Intelligence System" class="work-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+        <h2>Technical Expertise</h2>
+        <div class="skills-grid">
+            <div class="skill-category fade-in">
+                <h3>🤖 AI/ML Frameworks & Tools</h3>
+                <div class="skill-list">
+                    <span class="skill-item">RAG</span>
+                    <span class="skill-item">LLM</span>
+                    <span class="skill-item">AWS Bedrock</span>
+                    <span class="skill-item">LangChain</span>
+                    <span class="skill-item">CrewAI</span>
+                    <span class="skill-item">Facebook Prophet</span>
+                    <span class="skill-item">scikit-learn</span>
+                    <span class="skill-item">Predictive Modeling</span>
+                    <span class="skill-item">Machine Learning</span>
+                    <span class="skill-item">GenAI</span>
+                    <span class="skill-item">Statistics</span>
+                </div>
+            </div>
+            
+            <div class="skill-category fade-in">
+                <h3>☁️ Cloud & Infrastructure</h3>
+                <div class="skill-list">
+                    <span class="skill-item">AWS SageMaker</span>
+                    <span class="skill-item">AWS EC2</span>
+                    <span class="skill-item">AWS Lambda</span>
+                    <span class="skill-item">Flask APIs</span>
+                    <span class="skill-item">Streamlit</span>
+                    <span class="skill-item">Docker</span>
+                    <span class="skill-item">SQL</span>
+                    <span class="skill-item">NoSQL</span>
+                    <span class="skill-item">Python</span>
+                    <span class="skill-item">R</span>
+                </div>
+            </div>
+            
+            <div class="skill-category fade-in">
+                <h3>📊 Business Intelligence</h3>
+                <div class="skill-list">
+                    <span class="skill-item">Forecasting</span>
+		    <span class="skill-item">Tableau</span>
+                    <span class="skill-item">Time Series</span>
+                    <span class="skill-item">Inventory Optimization</span>
+                    <span class="skill-item">Google Analytics</span>
+                    <span class="skill-item">A/B Testing</span>
+                    <span class="skill-item">Dashboards</span>
+                    <span class="skill-item">3D Visualization</span>
+                    <span class="skill-item">Strategy</span>
+                    <span class="skill-item">Portfolio Optimization</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section id="achievements" class="section">
+        <h2>Key Achievements</h2>
+        <div class="achievements-grid">
+            <div class="achievement-card fade-in">
+                <div class="achievement-number">4.0</div>
+                <p>Perfect GPA<br>Master's & Data Analytics</p>
+            </div>
+            <div class="achievement-card fade-in">
+                <div class="achievement-number">96%</div>
+                <p>Accuracy in Healthcare<br>ML Predictions</p>
+            </div>
+            <div class="achievement-card fade-in">
+                <div class="achievement-number">$54K+</div>
+                <p>Total Funding Secured<br>AWS + Research Grants</p>
+            </div>
+            <div class="achievement-card fade-in">
+                <div class="achievement-number">121%</div>
+                <p>User Engagement Increase<br>Through Data-Driven Marketing</p>
+            </div>
+            <div class="achievement-card fade-in">
+                <div class="achievement-number">1,000+</div>
+                <p>Products Analyzed<br>with AI Forecasting Systems</p>
+            </div>
+            <div class="achievement-card fade-in">
+                <div class="achievement-number">3 min</div>
+                <p>AI Analysis Time<br>vs Weeks of Manual Work</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <h2>Ready to Transform Your Business with AI?</h2>
+        <p>Let's build AI solutions that drive real impact and measurable ROI</p>
+        <div class="contact-links">
+            <span style="color: #00d9ff;">📧 onumaloms.com</span>
+            <a href=https://www.linkedin.com/in/onumal/>💼 LinkedIn</a>
+            <a href=https://github.com/AmujoeAdiday>💻 GitHub</a>
+        </div>
+        <p style="margin-top: 2rem; opacity: 0.7;">© 2025 AI Data Scientist Portfolio. Building the future, one algorithm at a time.</p>
+    </footer>
+
+    <script>
+        // Animated background particles
+        function createParticles() {
+            const container = document.getElementById('bgAnimation');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                container.appendChild(particle);
+            }
+        }
+
+        // Navbar scroll effect
+        function handleNavbarScroll() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        }
+
+        // Smooth scrolling for navigation links
+        function setupSmoothScrolling() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+
+        // Intersection Observer for fade-in animations
+        function setupIntersectionObserver() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            document.querySelectorAll('.fade-in').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'all 0.6s ease-out';
+                observer.observe(el);
+            });
+        }
+
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            setupSmoothScrolling();
+            setupIntersectionObserver();
+            
+            window.addEventListener('scroll', handleNavbarScroll);
+            
+            // Add loading animation
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                document.body.style.transition = 'opacity 1s ease-in';
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+
+        // Add some interactive hover effects
+        document.addEventListener('mousemove', function(e) {
+            const cards = document.querySelectorAll('.experience-card, .project-card');
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / 10;
+                    const rotateY = (centerX - x) / 10;
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
+                } else {
+                    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
